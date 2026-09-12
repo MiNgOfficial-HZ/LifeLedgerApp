@@ -1,0 +1,163 @@
+name: Build APK
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      # 运行器自带 Android SDK，但目录位置随镜像版本变化，这里统一探测出来写进环境变量，
+      # 后面 build.ps1 就会按 ANDROID_HOME 自动找到 build-tools 和 android.jar。
+      - name: Locate Android SDK
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+
+          $roots = @(
+            $env:ANDROID_HOME
+            $env:ANDROID_SDK_ROOT
+            'C:\Android\android-sdk'
+            'C:\Android\Sdk'
+            (Join-Path $env:LOCALAPPDATA 'Android\Sdk')
+            'C:\Program Files (x86)\Android\android-sdk'
+          ) | Where-Object { $_ -and (Test-Path -LiteralPath (Join-Path $_ 'build-tools')) }
+
+          if (-not $roots) { throw '运行器上找不到 Android SDK 目录' }
+          $sdk = (Resolve-Path -LiteralPath ($roots | Select-Object -First 1)).ProviderPath
+
+          # 优先用与项目 targetSdk 对齐的 build-tools 34.0.0，保证构建结果稳定；
+          # 万一镜像将来移除它，再退回到版本最高的一个。
+          $pinnedBuildTools = Join-Path $sdk 'build-tools\34.0.0'
+          if (Test-Path -LiteralPath (Join-Path $pinnedBuildTools 'aapt2.exe')) {
+            $buildTools = $pinnedBuildTools
+          } else {
+            $buildTools = Get-ChildItem (Join-Path $sdk 'build-tools') -Directory |
+              Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'aapt2.exe') } |
+              Sort-Object { [int]($_.Name -replace '^(\d+).*', '$1') } -Descending |
+              Select-Object -First 1 -ExpandProperty FullName
+            Write-Warning "未找到 build-tools 34.0.0，改用 $buildTools"
+          }
+
+          $androidJar = Join-Path $sdk 'platforms\android-34\android.jar'
+          if (-not (Test-Path -LiteralPath $androidJar)) {
+            $platform = Get-ChildItem (Join-Path $sdk 'platforms') -Directory |
+              Where-Object { Test-Path -LiteralPath (Join-Path $_.FullName 'android.jar') } |
+              Sort-Object { [int]($_.Name -replace '^android-(\d+).*', '$1') } -Descending |
+              Select-Object -First 1
+            if (-not $platform) { throw "找不到任何 Android 平台包" }
+            $androidJar = Join-Path $platform.FullName 'android.jar'
+            Write-Warning "未找到 android-34 平台，改用 $($platform.Name)"
+          }
+
+          "ANDROID_HOME=$sdk"         | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          "ANDROID_SDK_ROOT=$sdk"     | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          "ANDROID_BUILD_TOOLS=$buildTools" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+          "ANDROID_JAR=$androidJar"   | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
+
+          Write-Output "Android SDK : $sdk"
+          Write-Output "build-tools : $buildTools"
+          Write-Output "android.jar : $androidJar"
+
+      # 用仓库 Secret 里的密钥签名，保证 CI 产出的 APK 能覆盖升级已安装的旧版本。
+      # 没配 Secret（例如别人 fork 后）就跳过，build.ps1 会自己生成一个临时密钥。
+      - name: Restore signing keystore
+        shell: pwsh
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        run: |
+          if (-not $env:KEYSTORE_BASE64) {
+            Write-Warning '未配置 KEYSTORE_BASE64，本次构建会使用临时密钥，产出的 APK 无法覆盖升级已安装的版本。'
+            exit 0
+          }
+          $path = Join-Path $env:RUNNER_TEMP 'release.keystore'
+          [System.IO.File]::WriteAllBytes($path, [System.Convert]::FromBase64String($env:KEYSTORE_BASE64))
+          Write-Output "已还原签名密钥到 $path"
+
+      - name: Build APK
+        shell: pwsh
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $workspace = $env:GITHUB_WORKSPACE
+          $dist = Join-Path $workspace 'dist'
+
+          $buildArgs = @{
+            BuildTools = $env:ANDROID_BUILD_TOOLS
+            AndroidJar = $env:ANDROID_JAR
+            OutDir     = $dist
+          }
+
+          $keystore = Join-Path $env:RUNNER_TEMP 'release.keystore'
+          if (Test-Path -LiteralPath $keystore) {
+            $buildArgs.Keystore = $keystore
+            $buildArgs.KeystorePassword = if ($env:KEYSTORE_PASSWORD) { $env:KEYSTORE_PASSWORD } else { 'lifebook2025' }
+            $buildArgs.KeyAlias = if ($env:KEY_ALIAS) { $env:KEY_ALIAS } else { 'lifebook' }
+          }
+
+          & (Join-Path $workspace 'build.ps1') @buildArgs
+          if ($LASTEXITCODE -ne 0) { throw "build.ps1 失败，退出码 $LASTEXITCODE" }
+
+          # 产出的中文文件名对下载直链不友好，这里统一复制一份 ASCII 名字用于发布
+          $manifest = Get-Content (Join-Path $workspace 'app\AndroidManifest.xml') -Raw -Encoding utf8
+          $version = if ($manifest -match 'versionName\s*=\s*"([^"]+)"') { $Matches[1] } else { 'dev' }
+
+          $apk = Get-ChildItem $dist -Filter *.apk | Where-Object { $_.Name -notlike 'LifeLedger-*' } | Select-Object -First 1
+          if (-not $apk) { throw "构建结束但 $dist 下没有 APK" }
+
+          $asciiApk = Join-Path $dist "LifeLedger-v$version.apk"
+          Copy-Item $apk.FullName $asciiApk -Force
+          Write-Output "APK: $asciiApk ($($apk.Length) 字节)"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LifeLedger-APK
+          path: dist/LifeLedger-*.apk
+          if-no-files-found: error
+
+      # 推 tag（v1.2 这种）时自动发 Release，普通提交只出构建产物
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $tag = $env:GITHUB_REF_NAME
+          $apk = Get-ChildItem (Join-Path $env:GITHUB_WORKSPACE 'dist') -Filter 'LifeLedger-*.apk' | Select-Object -First 1
+
+          $notes = @(
+            '纯本地 Android 记账应用，不联网、不上传，账单数据只保存在手机本地。'
+            ''
+            '### 安装'
+            '下载下面的 APK，传到手机上点击安装，按提示允许「安装未知来源应用」。'
+            '要求 Android 8.0（API 26）及以上。'
+            ''
+            '> 本包由 GitHub Actions 从本仓库源码自动构建，与旧版本使用同一签名密钥，可直接覆盖升级。'
+          ) -join "`n"
+
+          gh release view $tag 2>$null
+          if ($LASTEXITCODE -eq 0) {
+            gh release upload $tag $apk.FullName --clobber
+          } else {
+            gh release create $tag $apk.FullName --title "生活记账本 $tag" --notes $notes
+          }
