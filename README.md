@@ -5,6 +5,13 @@
 技术栈是最简单的 **纯 Java + 原生 XML 布局**，不使用 Gradle，由 `build.ps1`
 直接调用 Android SDK 命令行工具链（aapt2 / javac / d8 / zipalign / apksigner）打包 APK。
 
+## 下载安装
+
+不想自己编译的话，直接到 [Releases](https://github.com/MiNgOfficial-HZ/LifeLedgerApp/releases/latest)
+下载 `生活记账本_v2.0.apk`，传到手机上点击安装即可（需要在系统设置里允许「安装未知来源应用」）。
+
+应用要求 Android 8.0（API 26）及以上，已针对大部分安卓机型做过适配，正常安装即用。
+
 ## 功能
 
 - **多账本**：家庭、个人、旅行等账本分开记账，互不干扰
@@ -22,13 +29,13 @@
 
 ## 环境要求
 
-构建脚本顶部的路径常量需要改成你本机的实际路径（正常情况下可以做到安装即用 已做大部分安卓机型的适配）
-
-| 变量 | 说明 |
+| 依赖 | 说明 |
 | --- | --- |
-| `$jdk` | JDK 17 目录 |
-| `$bt` | Android SDK build-tools 目录（提供 aapt2、d8、zipalign、apksigner） |
-| `$jar` | 用于编译的 `android.jar`（API 34） |
+| 操作系统 | Windows（脚本使用 `d8.bat` / `apksigner.bat` 等批处理工具） |
+| PowerShell | Windows PowerShell 5.1 或 PowerShell 7 均可 |
+| JDK | JDK 11 及以上，推荐 17（脚本按 `-source/-target 11` 编译） |
+| Android SDK build-tools | 需包含 `aapt2`、`d8`、`zipalign`、`apksigner` |
+| android.jar | 对应 API 34 的平台包 |
 
 ## 构建
 
@@ -36,12 +43,41 @@
 powershell -ExecutionPolicy Bypass -File .\build.ps1
 ```
 
-脚本会依次完成编译资源、链接、javac、d8、zipalign、签名，最终在项目根目录
-输出已签名的 `生活记账本_v2.0.apk`。
+脚本会依次完成编译资源、链接、javac、d8、zipalign、签名，最终在项目根目录输出已签名的
+`生活记账本_v2.0.apk`（文件名跟随 `AndroidManifest.xml` 里的 `versionName`，改版本号即可自动改名）。
+
+工具链路径不需要改脚本，按下面的优先级自动解析：
+
+1. 命令行参数 `-Jdk` / `-BuildTools` / `-AndroidJar`
+2. 本地配置文件 `build.config.ps1`
+3. 环境变量 `LIFELEDGER_JDK` / `LIFELEDGER_BUILD_TOOLS` / `LIFELEDGER_ANDROID_JAR`
+4. 环境变量 `JAVA_HOME` / `ANDROID_HOME` / `ANDROID_SDK_ROOT`
+5. 常见安装目录自动探测（各 Java 发行版目录、Android Studio 自带 JBR、标准 SDK 目录）
+
+大多数装了 Android Studio 的机器第 5 条就能直接命中，零配置即可构建。若探测不到，
+脚本会明确提示缺哪一项、该用哪个参数补上。两种常用写法：
+
+```powershell
+# 方式一：命令行直接指定
+.\build.ps1 -Jdk "C:\jdk-17.0.20.1+1" `
+            -BuildTools "C:\Android\Sdk\build-tools\34.0.0" `
+            -AndroidJar "C:\Android\Sdk\platforms\android-34\android.jar"
+
+# 方式二：把本机路径写进 build.config.ps1（该文件已在 .gitignore 中），之后零参数构建
+Copy-Item .\build.config.example.ps1 .\build.config.ps1
+notepad .\build.config.ps1
+.\build.ps1
+```
 
 首次构建时会自动用 `keytool` 生成签名密钥到 `work/ks/lifebook.keystore`。
 该目录与密钥已在 `.gitignore` 中排除，请注意自行备份密钥文件：**同一个密钥
 才能覆盖安装升级，密钥丢失后旧版本无法直接升级。**
+
+签名相关也可配置：`-Keystore` 指定密钥路径，`-KeystorePassword` / `-KeyAlias` 指定口令与别名，
+`-OutDir` 指定 APK 输出目录。想用自己的密钥发布时，建议显式传入，避免使用默认口令。
+
+脚本会自动清理上一轮的 `work/gen`、`work/classes`、`work/dex-out`，避免已删除的源文件
+残留 `.class` 混进 APK。
 
 ## 项目结构
 
@@ -62,7 +98,8 @@ app/
     ui/                        各类弹窗、列表适配器与管理页
     util/                      备份、Excel 导出、通知、加锁、小工具
     view/                      自绘饼图与柱状图
-build.ps1                      一键构建打包脚本
+build.ps1                      一键构建打包脚本（工具链路径多级可配置）
+build.config.example.ps1       本机路径配置模板，复制成 build.config.ps1 后生效
 tools/                         IconGen、AddDex 两个构建辅助工具
 ```
 

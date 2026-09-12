@@ -1,6 +1,9 @@
 # 构建中间产物
 work/
 
+# 本机工具链路径配置（模板见 build.config.example.ps1）
+build.config.ps1
+
 # 签名密钥（由 build.ps1 首次构建时自动生成，不要提交）
 *.keystore
 *.jks
