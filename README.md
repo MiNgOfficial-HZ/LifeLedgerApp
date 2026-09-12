@@ -80,6 +80,27 @@ notepad .\build.config.ps1
 脚本会自动清理上一轮的 `work/gen`、`work/classes`、`work/dex-out`，避免已删除的源文件
 残留 `.class` 混进 APK。
 
+## 自动构建与发布
+
+仓库配好了 GitHub Actions（[.github/workflows/build.yml](.github/workflows/build.yml)），也可以在本地完全不用装环境：
+
+- **推送到 `main`**：自动在 Windows 运行器上编译，APK 作为构建产物挂在这次运行的 Artifacts 里
+- **推送 `v*` 标签**（如 `v2.1`）：编译后自动创建同名 Release 并附上 APK
+- **手动触发**：在 Actions 页面选 `Build APK` → `Run workflow`
+
+CI 里用的是仓库 Secret 保存的签名密钥，和本机 `work/ks/lifebook.keystore` 是同一个，
+所以 CI 产出的包能直接覆盖升级已安装的版本。相关 Secret：`KEYSTORE_BASE64`、
+`KEYSTORE_PASSWORD`、`KEY_ALIAS`；没配置时（比如别人 fork 之后）会自动改用临时密钥，
+构建仍然能跑通，只是签出来的包无法覆盖升级。
+
+发布新版本的流程就是把 `AndroidManifest.xml` 里的 `versionName` 改掉，然后：
+
+```powershell
+git commit -am "发布 v2.1"
+git tag v2.1
+git push origin main --tags
+```
+
 ## 项目结构
 
 ```
