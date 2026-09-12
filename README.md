@@ -7,8 +7,9 @@
 
 ## 下载安装
 
-不想自己编译的话，直接到 [Releases](https://github.com/MiNgOfficial-HZ/LifeLedgerApp/releases/latest)
-下载 `生活记账本_v2.0.apk`，传到手机上点击安装即可（需要在系统设置里允许「安装未知来源应用」）。
+不想自己编译的话，直接下载 **[LifeLedger-v2.0.apk](https://github.com/MiNgOfficial-HZ/LifeLedgerApp/releases/latest/download/LifeLedger-v2.0.apk)**，
+传到手机上点击安装即可（需要在系统设置里允许「安装未知来源应用」）。
+历史版本见 [Releases](https://github.com/MiNgOfficial-HZ/LifeLedgerApp/releases) 页面。
 
 应用要求 Android 8.0（API 26）及以上，已针对大部分安卓机型做过适配，正常安装即用。
 
