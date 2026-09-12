@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">生活记账本</string>
+    <string name="title_categories">分类管理</string>
+    <string name="title_books">账本管理</string>
+    <string name="title_recurring">周期记账</string>
+    <string name="title_recycle">回收站</string>
+</resources>

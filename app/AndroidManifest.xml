@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lifebook.ledger"
+    android:versionCode="5"
+    android:versionName="2.0">
+
+    <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="34" />
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+
+    <application
+        android:label="@string/app_name"
+        android:icon="@drawable/ic_launcher"
+        android:allowBackup="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.CategoryManageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:label="@string/title_categories" />
+
+        <activity
+            android:name=".ui.BookManageActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:label="@string/title_books" />
+
+        <activity
+            android:name=".ui.RecurringActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:label="@string/title_recurring" />
+
+        <activity
+            android:name=".ui.RecycleActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:label="@string/title_recycle" />
+
+        <provider
+            android:name=".ShareProvider"
+            android:authorities="com.lifebook.ledger.share"
+            android:exported="false"
+            android:grantUriPermissions="true" />
+
+        <receiver
+            android:name=".receiver.NotifyReceiver"
+            android:exported="false" />
+
+        <receiver
+            android:name=".receiver.BootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

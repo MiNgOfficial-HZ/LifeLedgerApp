@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@color/page_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:background="@color/card_bg" android:elevation="2dp"
+        android:paddingStart="8dp" android:paddingEnd="8dp"
+        android:paddingTop="6dp" android:paddingBottom="6dp">
+        <ImageButton android:id="@+id/btn_back"
+            android:layout_width="40dp" android:layout_height="40dp"
+            android:src="@drawable/ic_arrow_back" android:tint="@color/text_main"
+            android:background="?android:attr/selectableItemBackgroundBorderless" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="回收站" android:textSize="17sp" android:textStyle="bold"
+            android:textColor="@color/text_main" android:layout_marginStart="2dp" />
+        <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" />
+        <TextView android:id="@+id/btn_trash_clear"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:padding="10dp" android:text="清空" android:textSize="14sp"
+            android:textColor="@color/expense" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="这里存放被删除的记账与转账，可恢复或彻底删除。"
+        android:textSize="12sp" android:textColor="@color/text_sub"
+        android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" />
+
+    <ScrollView
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:scrollbars="none" android:overScrollMode="never"
+        android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="10dp">
+        <LinearLayout android:id="@+id/trash_container"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+</LinearLayout>

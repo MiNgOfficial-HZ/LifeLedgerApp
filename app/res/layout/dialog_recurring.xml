@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_sheet_top"
+    android:elevation="6dp"
+    android:padding="20dp">
+
+    <TextView android:id="@+id/tv_rc_title"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="新建周期记账" android:textSize="16sp" android:textStyle="bold"
+        android:textColor="@color/text_main" />
+
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_seg_track" android:padding="3dp"
+        android:layout_marginTop="12dp">
+        <TextView android:id="@+id/rc_exp"
+            android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:gravity="center" android:paddingTop="8dp" android:paddingBottom="8dp"
+            android:text="支出" android:textSize="13sp" android:textColor="@color/chip_text" />
+        <TextView android:id="@+id/rc_inc"
+            android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:gravity="center" android:paddingTop="8dp" android:paddingBottom="8dp"
+            android:text="收入" android:textSize="13sp" android:textColor="@color/chip_text" />
+    </LinearLayout>
+
+    <EditText android:id="@+id/et_rc_amount"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:background="@drawable/bg_input" android:padding="12dp"
+        android:layout_marginTop="12dp" android:hint="金额" android:inputType="numberDecimal"
+        android:textSize="16sp" android:textColor="@color/text_main"
+        android:textColorHint="@color/icon_gray" />
+
+    <EditText android:id="@+id/et_rc_day"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:background="@drawable/bg_input" android:padding="12dp"
+        android:layout_marginTop="12dp" android:hint="每月几号（1-31）" android:inputType="number"
+        android:textSize="14sp" android:textColor="@color/text_main"
+        android:textColorHint="@color/icon_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:layout_marginTop="12dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="分类" android:textSize="12sp" android:textColor="@color/text_sub" />
+        <LinearLayout android:id="@+id/rc_cat_container"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:layout_marginTop="4dp" />
+    </LinearLayout>
+
+    <Spinner android:id="@+id/sp_rc_book"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:background="@drawable/bg_input" android:padding="10dp" android:layout_marginTop="12dp" />
+
+    <EditText android:id="@+id/et_rc_note"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:background="@drawable/bg_input" android:padding="12dp"
+        android:layout_marginTop="12dp" android:hint="备注（可选）" android:textSize="14sp"
+        android:textColor="@color/text_main" android:textColorHint="@color/icon_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:layout_marginTop="16dp">
+        <TextView android:id="@+id/btn_rc_cancel"
+            android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:gravity="center" android:padding="13dp"
+            android:text="取消" android:textSize="14sp" android:textColor="@color/text_sub"
+            android:background="@drawable/bg_btn_ghost" />
+        <TextView android:id="@+id/btn_rc_save"
+            android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:gravity="center" android:padding="13dp"
+            android:text="保存" android:textSize="14sp" android:textStyle="bold"
+            android:textColor="#FFFFFF" android:background="@drawable/bg_btn_primary"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+</LinearLayout>

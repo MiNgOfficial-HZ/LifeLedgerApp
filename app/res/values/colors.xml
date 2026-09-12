@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Apple 设计语言：单色 Action Blue + 近黑墨字 + 纸白/珍珠表面 -->
+    <color name="primary">#0066cc</color>
+    <color name="primary_dark">#004a99</color>
+    <color name="primary_on_dark">#2997ff</color>
+    <color name="ink">#1d1d1f</color>
+    <color name="page_bg">#f5f5f7</color>
+    <color name="card_bg">#ffffff</color>
+    <color name="pearl">#fafafc</color>
+    <color name="text_main">#1d1d1f</color>
+    <color name="text_sub">#6e6e73</color>
+    <color name="income">#1a7f37</color>
+    <color name="expense">#d7263d</color>
+    <color name="chip_bg">#eef0f2</color>
+    <color name="chip_text">#1d1d1f</color>
+    <color name="chip_sel_bg">#e2e6ec</color>
+    <color name="chip_sel_text">#0066cc</color>
+    <color name="seg_track">#e8e8ed</color>
+    <color name="danger">#d70015</color>
+    <color name="tip_bg">#f0f2f6</color>
+    <color name="tip_border">#e0e3e8</color>
+    <color name="divider">#ececee</color>
+    <color name="hairline">#e0e0e0</color>
+    <color name="icon_gray">#86868b</color>
+</resources>

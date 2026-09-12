@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_card"
+    android:elevation="6dp"
+    android:padding="20dp">
+
+    <TextView android:id="@+id/tv_tr_title"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="账本间转账" android:textSize="16sp" android:textStyle="bold"
+        android:textColor="@color/text_main" />
+
+    <TextView
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="在不改变总收入/支出的情况下，在两个账本之间移动资金"
+        android:textSize="12sp" android:textColor="@color/text_sub"
+        android:layout_marginTop="3dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:layout_marginTop="14dp">
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:orientation="vertical">
+            <Spinner android:id="@+id/sp_from"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:background="@drawable/bg_input" android:padding="10dp" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="→" android:textSize="18sp" android:textColor="@color/text_sub"
+            android:gravity="center" android:paddingStart="8dp" android:paddingEnd="8dp" />
+        <LinearLayout
+            android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:orientation="vertical">
+            <Spinner android:id="@+id/sp_to"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:background="@drawable/bg_input" android:padding="10dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <EditText android:id="@+id/et_tr_amount"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_input" android:padding="12dp"
+        android:hint="转账金额" android:inputType="numberDecimal"
+        android:textSize="16sp" android:textColor="@color/text_main"
+        android:textColorHint="@color/icon_gray" />
+
+    <LinearLayout
+        android:id="@+id/row_date"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:clickable="true" android:focusable="true"
+        android:background="@drawable/bg_input" android:padding="12dp"
+        android:layout_marginTop="12dp">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="日期" android:textSize="14sp"
+            android:textColor="@color/text_sub" />
+        <TextView android:id="@+id/tv_tr_date"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textSize="14sp" android:textStyle="bold"
+            android:textColor="@color/primary" />
+    </LinearLayout>
+
+    <EditText android:id="@+id/et_tr_note"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_input" android:padding="12dp"
+        android:hint="备注（可选）" android:textColor="@color/text_main"
+        android:textColorHint="@color/icon_gray" />
+
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:layout_marginTop="18dp">
+        <TextView android:id="@+id/btn_tr_cancel"
+            android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:gravity="center" android:padding="13dp"
+            android:text="取消" android:textSize="14sp" android:textColor="@color/text_sub"
+            android:background="@drawable/bg_btn_ghost" />
+        <TextView android:id="@+id/btn_tr_save"
+            android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+            android:gravity="center" android:padding="13dp"
+            android:text="确认转账" android:textSize="14sp" android:textStyle="bold"
+            android:textColor="#FFFFFF" android:background="@drawable/bg_btn_primary"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+</LinearLayout>

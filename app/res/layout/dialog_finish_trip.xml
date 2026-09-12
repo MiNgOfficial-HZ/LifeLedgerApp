@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_card"
+    android:elevation="6dp"
+    android:padding="20dp">
+
+    <TextView android:id="@+id/tv_ft_title"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="结束这次出游" android:textSize="16sp" android:textStyle="bold"
+        android:textColor="@color/text_main" />
+
+    <TextView android:id="@+id/tv_ft_msg"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:textSize="13sp" android:textColor="@color/text_main"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginTop="8dp" />
+
+    <TextView android:id="@+id/btn_ft_main"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:gravity="center" android:padding="13dp"
+        android:text="结束并合并进主账本" android:textSize="14sp" android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/bg_btn_primary"
+        android:layout_marginTop="16dp" />
+
+    <TextView android:id="@+id/btn_ft_vault"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:gravity="center" android:padding="13dp"
+        android:text="结束并合并进小金库" android:textSize="14sp" android:textStyle="bold"
+        android:textColor="@color/primary"
+        android:background="@drawable/bg_btn_ghost"
+        android:layout_marginTop="10dp" />
+
+    <TextView android:id="@+id/btn_ft_cancel"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:gravity="center" android:padding="13dp"
+        android:text="点错了，取消" android:textSize="14sp"
+        android:textColor="@color/text_sub"
+        android:background="@drawable/bg_btn_ghost"
+        android:layout_marginTop="10dp" />
+</LinearLayout>

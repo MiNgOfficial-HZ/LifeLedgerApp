@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#0a84ff</color>
+    <color name="primary_dark">#003f88</color>
+    <color name="primary_on_dark">#409cff</color>
+    <color name="ink">#f5f5f7</color>
+    <color name="page_bg">#000000</color>
+    <color name="card_bg">#1c1c1e</color>
+    <color name="pearl">#1f1f21</color>
+    <color name="text_main">#f5f5f7</color>
+    <color name="text_sub">#86868b</color>
+    <color name="income">#32d74b</color>
+    <color name="expense">#ff453a</color>
+    <color name="chip_bg">#2c2c2e</color>
+    <color name="chip_text">#f5f5f7</color>
+    <color name="chip_sel_bg">#48484a</color>
+    <color name="chip_sel_text">#0a84ff</color>
+    <color name="seg_track">#2c2c2e</color>
+    <color name="danger">#ff453a</color>
+    <color name="tip_bg">#1c1c1e</color>
+    <color name="tip_border">#2c2c2e</color>
+    <color name="divider">#2c2c2e</color>
+    <color name="hairline">#3a3a3c</color>
+    <color name="icon_gray">#8e8e93</color>
+</resources>

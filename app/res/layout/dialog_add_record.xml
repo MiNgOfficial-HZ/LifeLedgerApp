@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_sheet_top"
+    android:scrollbars="none"
+    android:overScrollMode="never">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <View
+            android:layout_width="36dp" android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_handle" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="14dp">
+            <TextView android:id="@+id/tv_dlg_title"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="记一笔" android:textSize="17sp" android:textStyle="bold"
+                android:textColor="@color/text_main" />
+            <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" />
+            <ImageButton android:id="@+id/btn_close"
+                android:layout_width="32dp" android:layout_height="32dp"
+                android:src="@drawable/ic_clear" android:tint="@color/icon_gray"
+                android:background="?android:attr/selectableItemBackgroundBorderless" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/bg_seg_track"
+            android:padding="3dp"
+            android:layout_marginTop="14dp">
+            <TextView android:id="@+id/chip_dlg_expense"
+                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                android:gravity="center" android:paddingTop="8dp" android:paddingBottom="8dp"
+                android:text="支出" android:textSize="13sp" android:textColor="@color/chip_text" />
+            <TextView android:id="@+id/chip_dlg_income"
+                android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                android:gravity="center" android:paddingTop="8dp" android:paddingBottom="8dp"
+                android:text="收入" android:textSize="13sp" android:textColor="@color/chip_text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="14dp">
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="¥" android:textSize="26sp" android:textStyle="bold"
+                android:textColor="@color/text_main" />
+            <EditText android:id="@+id/et_amount"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:background="@null"
+                android:hint="0.00"
+                android:textColor="@color/text_main"
+                android:textColorHint="@color/icon_gray"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:inputType="numberDecimal"
+                android:maxLength="12"
+                android:maxLines="1" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="一级分类" android:textSize="12sp" android:textColor="@color/text_sub"
+            android:layout_marginTop="14dp" />
+        <LinearLayout
+            android:id="@+id/cat1_container"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="4dp" />
+
+        <TextView android:id="@+id/label_cat2"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="二级分类" android:textSize="12sp" android:textColor="@color/text_sub"
+            android:layout_marginTop="10dp" android:visibility="gone" />
+        <LinearLayout
+            android:id="@+id/cat2_container"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="4dp" android:visibility="gone" />
+
+        <LinearLayout android:id="@+id/row_date"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_input"
+            android:padding="12dp"
+            android:layout_marginTop="12dp"
+            android:clickable="true" android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+            <ImageView android:layout_width="18dp" android:layout_height="18dp"
+                android:src="@drawable/ic_calendar" android:tint="@color/icon_gray" />
+            <TextView android:id="@+id/tv_date"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:textSize="14sp" android:textColor="@color/text_main" />
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="点击选择日期" android:textSize="12sp" android:textColor="@color/text_sub" />
+        </LinearLayout>
+
+        <EditText android:id="@+id/et_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="56dp"
+            android:gravity="top"
+            android:background="@drawable/bg_input"
+            android:padding="12dp"
+            android:layout_marginTop="12dp"
+            android:hint="备注（可选），例如：和室友AA / 面试补贴"
+            android:textColor="@color/text_main"
+            android:textColorHint="@color/icon_gray"
+            android:textSize="14sp"
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLines="3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <TextView android:id="@+id/btn_dlg_delete"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:layout_marginEnd="8dp"
+                android:gravity="center" android:padding="12dp"
+                android:text="删除" android:textSize="14sp" android:textStyle="bold"
+                android:textColor="@color/danger"
+                android:background="@drawable/bg_btn_ghost"
+                android:visibility="gone" />
+            <TextView android:id="@+id/btn_dlg_cancel"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:layout_marginEnd="8dp"
+                android:gravity="center" android:padding="12dp"
+                android:text="取消" android:textSize="14sp"
+                android:textColor="@color/chip_text"
+                android:background="@drawable/bg_btn_ghost" />
+            <TextView android:id="@+id/btn_dlg_save"
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center" android:padding="12dp"
+                android:text="保存" android:textSize="14sp" android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/bg_btn_primary" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

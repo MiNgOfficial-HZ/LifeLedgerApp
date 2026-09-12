@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    android:overScrollMode="never">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@color/page_bg">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="管理" android:textSize="26sp" android:textStyle="bold"
+            android:letterSpacing="-0.02"
+            android:textColor="@color/text_main" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="账本 · 分类 · 数据 · 备份 · 提醒" android:textSize="12sp" android:textColor="@color/text_sub"
+            android:layout_marginTop="2dp" android:layout_marginBottom="14dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="8dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="账本" android:textSize="12sp" android:textStyle="bold"
+                android:textColor="@color/text_sub" android:paddingStart="10dp"
+                android:paddingTop="6dp" android:paddingBottom="6dp" />
+
+            <LinearLayout android:id="@+id/row_books"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:clickable="true" android:focusable="true"
+                android:padding="12dp"
+                android:foreground="?android:attr/selectableItemBackground">
+                <FrameLayout android:layout_width="38dp" android:layout_height="38dp"
+                    android:background="@drawable/bg_emoji">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                        android:layout_gravity="center" android:src="@drawable/ic_list"
+                        android:tint="@color/primary" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="12dp" android:layout_marginEnd="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="账本管理" android:textSize="15sp" android:textStyle="bold"
+                        android:textColor="@color/text_main" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="新建、重命名或删除自定义账本"
+                        android:textSize="12sp" android:textColor="@color/text_sub"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+                <ImageView android:layout_width="18dp" android:layout_height="18dp"
+                    android:src="@drawable/ic_chev_right" android:tint="@color/icon_gray" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="8dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="分类" android:textSize="12sp" android:textStyle="bold"
+                android:textColor="@color/text_sub" android:paddingStart="10dp"
+                android:paddingTop="6dp" android:paddingBottom="6dp" />
+
+            <LinearLayout android:id="@+id/row_categories"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:clickable="true" android:focusable="true"
+                android:padding="12dp"
+                android:foreground="?android:attr/selectableItemBackground">
+                <FrameLayout android:layout_width="38dp" android:layout_height="38dp"
+                    android:background="@drawable/bg_emoji">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                        android:layout_gravity="center" android:src="@drawable/ic_tag"
+                        android:tint="@color/primary" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="12dp" android:layout_marginEnd="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="分类管理" android:textSize="15sp" android:textStyle="bold"
+                        android:textColor="@color/text_main" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="增删改收入和支出的两级分类"
+                        android:textSize="12sp" android:textColor="@color/text_sub"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+                <ImageView android:layout_width="18dp" android:layout_height="18dp"
+                    android:src="@drawable/ic_chev_right" android:tint="@color/icon_gray" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="8dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="数据" android:textSize="12sp" android:textStyle="bold"
+                android:textColor="@color/text_sub" android:paddingStart="10dp"
+                android:paddingTop="6dp" android:paddingBottom="6dp" />
+
+            <LinearLayout android:id="@+id/row_export_excel"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:clickable="true" android:focusable="true"
+                android:padding="12dp"
+                android:foreground="?android:attr/selectableItemBackground">
+                <FrameLayout android:layout_width="38dp" android:layout_height="38dp"
+                    android:background="@drawable/bg_emoji">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                        android:layout_gravity="center" android:src="@drawable/ic_excel"
+                        android:tint="@color/primary" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="12dp" android:layout_marginEnd="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="导出当月 Excel 表格" android:textSize="15sp"
+                        android:textStyle="bold" android:textColor="@color/text_main" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="生成 .xlsx，可发送到电脑进行分析"
+                        android:textSize="12sp" android:textColor="@color/text_sub"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+                <ImageView android:layout_width="18dp" android:layout_height="18dp"
+                    android:src="@drawable/ic_chev_right" android:tint="@color/icon_gray" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/row_export_zip"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:clickable="true" android:focusable="true"
+                android:padding="12dp"
+                android:foreground="?android:attr/selectableItemBackground">
+                <FrameLayout android:layout_width="38dp" android:layout_height="38dp"
+                    android:background="@drawable/bg_emoji">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                        android:layout_gravity="center" android:src="@drawable/ic_backup"
+                        android:tint="@color/primary" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="12dp" android:layout_marginEnd="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="导出全部备份 (ZIP)" android:textSize="15sp"
+                        android:textStyle="bold" android:textColor="@color/text_main" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="打包全部数据，换手机时可整体恢复"
+                        android:textSize="12sp" android:textColor="@color/text_sub"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+                <ImageView android:layout_width="18dp" android:layout_height="18dp"
+                    android:src="@drawable/ic_chev_right" android:tint="@color/icon_gray" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/row_import"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:clickable="true" android:focusable="true"
+                android:padding="12dp"
+                android:foreground="?android:attr/selectableItemBackground">
+                <FrameLayout android:layout_width="38dp" android:layout_height="38dp"
+                    android:background="@drawable/bg_emoji">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                        android:layout_gravity="center" android:src="@drawable/ic_import"
+                        android:tint="@color/primary" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="12dp" android:layout_marginEnd="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="导入备份" android:textSize="15sp"
+                        android:textStyle="bold" android:textColor="@color/text_main" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="从 .zip / .json 文件恢复全部数据"
+                        android:textSize="12sp" android:textColor="@color/text_sub"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+                <ImageView android:layout_width="18dp" android:layout_height="18dp"
+                    android:src="@drawable/ic_chev_right" android:tint="@color/icon_gray" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/row_recurring"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:clickable="true" android:focusable="true"
+                android:padding="12dp"
+                android:foreground="?android:attr/selectableItemBackground">
+                <FrameLayout android:layout_width="38dp" android:layout_height="38dp"
+                    android:background="@drawable/bg_emoji">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                        android:layout_gravity="center" android:src="@drawable/ic_calendar"
+                        android:tint="@color/primary" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="12dp" android:layout_marginEnd="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="周期记账" android:textSize="15sp"
+                        android:textStyle="bold" android:textColor="@color/text_main" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="每月固定自动生成一笔（生活费 / 房租等）"
+                        android:textSize="12sp" android:textColor="@color/text_sub"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+                <ImageView android:layout_width="18dp" android:layout_height="18dp"
+                    android:src="@drawable/ic_chev_right" android:tint="@color/icon_gray" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/row_recycle"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:clickable="true" android:focusable="true"
+                android:padding="12dp"
+                android:foreground="?android:attr/selectableItemBackground">
+                <FrameLayout android:layout_width="38dp" android:layout_height="38dp"
+                    android:background="@drawable/bg_emoji">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                        android:layout_gravity="center" android:src="@drawable/ic_delete"
+                        android:tint="@color/primary" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="12dp" android:layout_marginEnd="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="回收站" android:textSize="15sp"
+                        android:textStyle="bold" android:textColor="@color/text_main" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="恢复或彻底删除已删除的账目"
+                        android:textSize="12sp" android:textColor="@color/text_sub"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+                <ImageView android:layout_width="18dp" android:layout_height="18dp"
+                    android:src="@drawable/ic_chev_right" android:tint="@color/icon_gray" />
+            </LinearLayout>
+
+            <LinearLayout android:id="@+id/row_clear"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:clickable="true" android:focusable="true"
+                android:padding="12dp"
+                android:foreground="?android:attr/selectableItemBackground">
+                <FrameLayout android:layout_width="38dp" android:layout_height="38dp"
+                    android:background="@drawable/bg_emoji">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                        android:layout_gravity="center" android:src="@drawable/ic_delete"
+                        android:tint="@color/expense" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="12dp" android:layout_marginEnd="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="清空全部数据" android:textSize="15sp"
+                        android:textStyle="bold" android:textColor="@color/expense" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="删除本机全部记录（操作前建议先备份）"
+                        android:textSize="12sp" android:textColor="@color/text_sub"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+                <ImageView android:layout_width="18dp" android:layout_height="18dp"
+                    android:src="@drawable/ic_chev_right" android:tint="@color/icon_gray" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="8dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="安全" android:textSize="12sp" android:textStyle="bold"
+                android:textColor="@color/text_sub" android:paddingStart="10dp"
+                android:paddingTop="6dp" android:paddingBottom="6dp" />
+
+            <LinearLayout android:id="@+id/row_fingerprint"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:clickable="true" android:focusable="true"
+                android:padding="12dp"
+                android:foreground="?android:attr/selectableItemBackground">
+                <FrameLayout android:layout_width="38dp" android:layout_height="38dp"
+                    android:background="@drawable/bg_emoji">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                        android:layout_gravity="center" android:src="@drawable/ic_lock"
+                        android:tint="@color/primary" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="12dp" android:layout_marginEnd="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="指纹解锁" android:textSize="15sp"
+                        android:textStyle="bold" android:textColor="@color/text_main" />
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="打开应用时需验证本机指纹"
+                        android:textSize="12sp" android:textColor="@color/text_sub"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+                <Switch
+                    android:id="@+id/sw_fingerprint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="使用手机锁屏时录入的指纹。首次开启前请在系统设置中确认已录入指纹并设置了锁屏密码。"
+                android:textSize="11sp" android:textColor="@color/icon_gray"
+                android:lineSpacingExtra="3dp"
+                android:paddingStart="12dp" android:paddingEnd="12dp"
+                android:paddingTop="4dp" android:paddingBottom="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="8dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="提醒" android:textSize="12sp" android:textStyle="bold"
+                android:textColor="@color/text_sub" android:paddingStart="10dp"
+                android:paddingTop="6dp" android:paddingBottom="6dp" />
+
+            <LinearLayout android:id="@+id/row_daily"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:clickable="true" android:focusable="true"
+                android:padding="12dp"
+                android:foreground="?android:attr/selectableItemBackground">
+                <FrameLayout android:layout_width="38dp" android:layout_height="38dp"
+                    android:background="@drawable/bg_emoji">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                        android:layout_gravity="center" android:src="@drawable/ic_notif"
+                        android:tint="@color/primary" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="12dp" android:layout_marginEnd="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="每日记账提醒" android:textSize="15sp"
+                        android:textStyle="bold" android:textColor="@color/text_main" />
+                    <TextView android:id="@+id/tv_daily_time"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="每天 21:00" android:textSize="13sp"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+                <Switch
+                    android:id="@+id/sw_daily"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="0.5dp"
+                android:layout_marginStart="12dp" android:layout_marginEnd="12dp"
+                android:background="@color/divider" />
+
+            <LinearLayout android:id="@+id/row_weekly"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:clickable="true" android:focusable="true"
+                android:padding="12dp"
+                android:foreground="?android:attr/selectableItemBackground">
+                <FrameLayout android:layout_width="38dp" android:layout_height="38dp"
+                    android:background="@drawable/bg_emoji">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                        android:layout_gravity="center" android:src="@drawable/ic_chart"
+                        android:tint="@color/primary" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="12dp" android:layout_marginEnd="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="每周周报" android:textSize="15sp"
+                        android:textStyle="bold" android:textColor="@color/text_main" />
+                    <TextView android:id="@+id/tv_weekly_time"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="每周一 20:00 · 发送上周账单" android:textSize="13sp"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+                <Switch
+                    android:id="@+id/sw_weekly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="0.5dp"
+                android:layout_marginStart="12dp" android:layout_marginEnd="12dp"
+                android:background="@color/divider" />
+
+            <LinearLayout android:id="@+id/row_monthly"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:clickable="true" android:focusable="true"
+                android:padding="12dp"
+                android:foreground="?android:attr/selectableItemBackground">
+                <FrameLayout android:layout_width="38dp" android:layout_height="38dp"
+                    android:background="@drawable/bg_emoji">
+                    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+                        android:layout_gravity="center" android:src="@drawable/ic_info"
+                        android:tint="@color/primary" />
+                </FrameLayout>
+                <LinearLayout
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:orientation="vertical"
+                    android:layout_marginStart="12dp" android:layout_marginEnd="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="每月月报" android:textSize="15sp"
+                        android:textStyle="bold" android:textColor="@color/text_main" />
+                    <TextView android:id="@+id/tv_monthly_time"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="每月 1 日 09:00 · 发送上月账单" android:textSize="13sp"
+                        android:textColor="@color/primary"
+                        android:textStyle="bold"
+                        android:layout_marginTop="2dp" />
+                </LinearLayout>
+                <Switch
+                    android:id="@+id/sw_monthly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="提醒为本地通知，本应用不联网。首次开启请在系统允许「通知」权限；若系统提示「精确闹钟」请一并允许，否则提醒时间可能不准。"
+                android:textSize="11sp" android:textColor="@color/icon_gray"
+                android:lineSpacingExtra="3dp"
+                android:paddingStart="12dp" android:paddingEnd="12dp"
+                android:paddingTop="4dp" android:paddingBottom="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_card"
+            android:padding="16dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="关于" android:textSize="15sp" android:textStyle="bold"
+                android:textColor="@color/text_main" />
+            <TextView android:id="@+id/tv_about_text"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="12sp" android:textColor="@color/text_sub"
+                android:lineSpacingExtra="5dp"
+                android:layout_marginTop="8dp" />
+            <TextView android:id="@+id/tv_version"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:textSize="11sp" android:textColor="@color/icon_gray"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,22 @@
+# 构建中间产物
+work/
+
+# 签名密钥（由 build.ps1 首次构建时自动生成，不要提交）
+*.keystore
+*.jks
+
+# 编译输出
+*.class
+gen/
+
+# 打包产物
+*.apk
+*.idsig
+*.zip
+
+# 编辑器 / 系统
+.idea/
+.vscode/
+*.iml
+Thumbs.db
+desktop.ini

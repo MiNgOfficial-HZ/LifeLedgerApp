@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/page_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:background="@color/card_bg" android:elevation="2dp"
+        android:paddingStart="8dp" android:paddingEnd="8dp"
+        android:paddingTop="6dp" android:paddingBottom="6dp">
+        <ImageButton android:id="@+id/btn_back"
+            android:layout_width="40dp" android:layout_height="40dp"
+            android:src="@drawable/ic_arrow_back" android:tint="@color/text_main"
+            android:background="?android:attr/selectableItemBackgroundBorderless" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="周期记账" android:textSize="17sp" android:textStyle="bold"
+            android:textColor="@color/text_main" android:layout_marginStart="2dp" />
+        <View android:layout_width="0dp" android:layout_height="1dp" android:layout_weight="1" />
+        <TextView android:id="@+id/btn_add_recurring"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:padding="10dp" android:text="＋ 周期" android:textSize="14sp"
+            android:textStyle="bold" android:textColor="@color/primary" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:text="每月固定自动生成一笔（如生活费、房租）。打开应用时会自动执行到期项目，也可点「立即生成本月」。"
+        android:textSize="12sp" android:textColor="@color/text_sub"
+        android:lineSpacingExtra="3dp"
+        android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" />
+
+    <TextView android:id="@+id/btn_run_this_month"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginStart="16dp" android:layout_marginTop="8dp"
+        android:padding="10dp" android:text="立即生成本月" android:textSize="13sp"
+        android:textStyle="bold" android:textColor="@color/primary"
+        android:background="@drawable/bg_chip" />
+
+    <ScrollView
+        android:layout_width="match_parent" android:layout_height="0dp"
+        android:layout_weight="1" android:scrollbars="none" android:overScrollMode="never"
+        android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="10dp">
+        <LinearLayout android:id="@+id/recurring_container"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+</LinearLayout>
